@@ -17,7 +17,6 @@
 
 &right_encoder { steps = <60>; };
 
-
 #define BASE 0
 #define LOWER 1
 #define RAISE 2
@@ -26,33 +25,9 @@
 / {
     // Activate ADJUST layer by pressing raise and lower
 
-    conditional_layers {
-        compatible = "zmk,conditional-layers";
+    conditional_layers { compatible = "zmk,conditional-layers"; };
 
-        adjust_layer {
-            if-layers = <LOWER RAISE>;
-            then-layer = <ADJUST>;
-        };
-    };
-
-    combos {
-        compatible = "zmk,combos";
-
-        backspace {
-            bindings = <&kp BACKSPACE>;
-            key-positions = <32 31>;
-        };
-
-        delete {
-            bindings = <&kp DELETE>;
-            key-positions = <27 33>;
-        };
-
-        esc {
-            bindings = <&kp ESCAPE>;
-            key-positions = <25 41>;
-        };
-    };
+    combos { compatible = "zmk,combos"; };
 
     behaviors {
         caps: caps {
@@ -66,7 +41,7 @@
     keymap {
         compatible = "zmk,keymap";
 
-        default_layer {
+        alpha {
             display-name = "Base";
 
             // ------------------------------------------------------------------------------------------------------------
@@ -77,17 +52,17 @@
             //               | GUI | ALT  | CTRL | LOWER|  ENTER |  | SPACE | RAISE| CTRL  | ALT   | GUI  |
 
             bindings = <
-&gresc            &kp N1  &kp N2    &kp N3    &kp N4     &kp N5                                     &kp N6     &kp N7     &kp N8     &kp N9    &kp N0    &kp MINUS
-&kp TAB           &kp Q   &kp W     &kp E     &kp R      &kp T                                      &kp Y      &kp U      &kp I      &kp O     &kp P     &kp BSPC
-&kp LEFT_SHIFT    &kp A   &kp S     &kp D     &kp F      &kp G                                      &kp H      &kp J      &kp K      &kp L     &kp SEMI  &kp SQT
-&kp LEFT_CONTROL  &kp Z   &kp X     &kp C     &kp V      &kp B      &kp C_MUTE    &kp C_PLAY_PAUSE  &kp N      &kp M      &kp COMMA  &kp DOT   &kp FSLH  &kp RSHFT
-                          &kp LGUI  &kp LALT  &kp LCTRL  &mo LOWER  &kp SPACE     &kp ENTER         &mo RAISE  &kp RCTRL  &kp LALT   &kp RGUI
+&kp EQUAL       &kp N1              &kp N2          &kp N3          &kp N4            &kp N5                                     &kp N6     &kp N7             &kp N8           &kp N9          &kp N0                  &kp MINUS
+&kp GRAVE       &kp Q               &kp W           &kp E           &kp R             &kp T                                      &kp Y      &kp U              &kp I            &kp O           &kp P                   &kp BACKSLASH
+&lt 2 CAPSLOCK  &mt LEFT_CONTROL A  &mt LEFT_ALT S  &mt LEFT_GUI D  &mt LEFT_SHIFT F  &kp G                                      &kp H      &mt RIGHT_SHIFT J  &mt RIGHT_GUI K  &mt LEFT_ALT L  &mt RIGHT_CONTROL SEMI  &kp SQT
+&mo 1           &kp Z               &kp X           &kp C           &kp V             &kp B      &kp C_MUTE    &kp C_PLAY_PAUSE  &kp N      &kp M              &kp COMMA        &kp DOT         &kp FSLH                &mo 1
+                                    &none           &none           &mo 3             &kp SPACE  &kp TAB       &kp BACKSPACE     &kp ENTER  &kp ESCAPE         &none            &none
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
         };
 
-        lower_layer {
+        symbols {
             display-name = "Symbols";
 
             // TODO: Some binds are waiting for shifted keycode support.
@@ -99,11 +74,11 @@
             //               |     |      |      |      |        |  |       |      |       |       |      |
 
             bindings = <
-&trans  &kp F1     &kp F2     &kp F3    &kp F4    &kp F5                       &kp F6          &kp F7         &kp F8          &kp F9                &kp F10                &kp F11
-&trans  &kp N1     &kp N2     &kp N3    &kp N4    &kp N5                       &kp CARET       &kp AMPERSAND  &kp ASTRK       &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp F12
-&trans  &kp EXCL   &kp AT     &kp HASH  &kp DLLR  &kp PRCNT                    &kp MINUS       &kp EQUAL      &kp ASTRK       &kp LEFT_BRACKET      &kp RIGHT_BRACKET      &kp PIPE
-&trans  &kp EQUAL  &kp MINUS  &kp PLUS  &kp LBRC  &kp RBRC   &trans    &trans  &kp UNDERSCORE  &kp PLUS       &kp LEFT_BRACE  &kp RIGHT_BRACE       &kp PIPE               &trans
-                   &trans     &trans    &trans    &trans     &trans    &trans  &trans          &trans         &trans          &trans
+&none  &none             &kp N7                 &kp N8           &kp N9             &kp LEFT_BRACKET                      &kp RIGHT_BRACKET      &kp F10             &kp F11           &kp F12           &none              &none
+&none  &none             &kp N4                 &kp N5           &kp N6             &kp LEFT_BRACE                        &kp RIGHT_BRACE        &kp F7              &kp F8            &kp F9            &none              &none
+&none  &kp LEFT_CONTROL  &mt LEFT_ALT NUMBER_1  &mt LEFT_GUI N2  &mt LEFT_SHIFT N3  &kp LEFT_PARENTHESIS                  &kp RIGHT_PARENTHESIS  &mt RIGHT_SHIFT F4  &mt RIGHT_GUI F5  &mt RIGHT_ALT F6  &kp RIGHT_CONTROL  &none
+&none  &none             &kp COMMA              &kp DOT          &kp N0             &kp LESS_THAN         &none    &none  &kp GREATER_THAN       &kp F1              &kp F2            &kp F3            &none              &none
+                         &none                  &none            &none              &none                 &none    &none  &none                  &none               &none             &none
             >;
 
             sensor-bindings =
@@ -111,7 +86,7 @@
                 <&inc_dec_kp UP_ARROW DOWN_ARROW>;
         };
 
-        raise_layer {
+        hotkeys {
             display-name = "Nav";
 
             // ------------------------------------------------------------------------------------------------------------
@@ -122,17 +97,31 @@
             //                |      |       |       |      |      |  |      |      |      |       |      |
 
             bindings = <
-&trans  &trans      &trans     &trans       &trans       &trans                      &trans     &trans    &trans    &trans     &trans   &trans
-&trans  &kp INS     &kp PSCRN  &kp K_CMENU  &trans       &trans                      &kp PG_UP  &trans    &kp UP    &trans     &kp N0   &trans
-&trans  &kp LALT    &kp LCTRL  &kp LSHFT    &trans       &kp CLCK                    &kp PG_DN  &kp LEFT  &kp DOWN  &kp RIGHT  &kp DEL  &kp BSPC
-&trans  &kp K_UNDO  &kp K_CUT  &kp K_COPY   &kp K_PASTE  &trans    &trans    &trans  &trans     &trans    &trans    &trans     &trans   &trans
-                    &trans     &trans       &trans       &trans    &trans    &trans  &trans     &trans    &trans    &trans
+&none  &none      &none                     &none        &none             &none                          &none  &kp N7        &kp N8     &kp N9      &none  &none
+&none  &none      &none                     &kp K_CMENU  &kp LG(R)         &kp LG(T)                      &none  &kp N4        &kp N5     &kp N6      &none  &none
+&none  &kp LG(A)  &kp LC(LS(LG(NUMBER_4)))  &none        &kp LG(F)         &none                          &none  &kp NUMBER_1  &kp N2     &kp N3      &none  &none
+&none  &kp LG(Z)  &kp LG(X)                 &kp LG(C)    &kp LG(V)         &none          &none    &none  &none  &kp N0        &kp COMMA  &kp PERIOD  &none  &none
+                  &none                     &none        &kp LC(UP_ARROW)  &kp LG(SPACE)  &none    &none  &none  &none         &none      &none
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
         };
 
-        adjust_layer {
+        arrows {
+            bindings = <
+&trans          &trans        &trans  &trans  &trans  &tog 4                    &trans    &trans    &trans  &trans     &trans         &trans
+&trans          &trans        &trans  &trans  &trans  &trans                    &trans    &trans    &trans  &trans     &trans         &trans
+&trans          &trans        &trans  &trans  &trans  &trans                    &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT  &trans         &trans
+&kp LEFT_SHIFT  &kp LEFT_ALT  &trans  &trans  &trans  &trans  &trans    &trans  &trans    &trans    &trans  &trans     &kp RIGHT_ALT  &kp RIGHT_SHIFT
+                              &trans  &trans  &trans  &trans  &trans    &trans  &trans    &trans    &trans  &trans
+            >;
+
+            sensor-bindings =
+                <&inc_dec_kp C_VOL_UP C_VOL_DN>,
+                <&inc_dec_kp PG_UP PAGE_DOWN>;
+        };
+
+        system {
             // ----------------------------------------------------------------------------------------------------------------------------
             // | BTCLR  |  BT1    |  BT2    |   BT3   |   BT4   |   BT5   |                  |      |      |       |      |       |       |
             // | EXTPWR | RGB_HUD | RGB_HUI | RGB_SAD | RGB_SAI | RGB_EFF |                  |      |      |       |      |       |       |
@@ -142,11 +131,11 @@
 
             display-name = "System";
             bindings = <
-&bt BT_CLR_ALL     &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4                  &none  &none  &none  &none  &none  &none
-&ext_power EP_TOG  &none         &none         &none         &none         &studio_unlock                         &none  &none  &none  &none  &none  &none
-&none              &none         &none         &none         &none         &none                         &none  &none  &none  &none  &none  &none
-&none              &none         &none         &none         &none         &caps_word    &none    &none  &none  &none  &none  &none  &none  &none
-                                 &none         &none         &none         &none         &none    &none  &none  &none  &none  &none
+&bt BT_CLR_ALL     &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4                    &none  &none  &none  &none  &none  &none
+&ext_power EP_TOG  &none         &none         &none         &none         &studio_unlock                  &none  &none  &none  &none  &none  &none
+&none              &none         &none         &none         &none         &none                           &none  &none  &none  &none  &none  &none
+&none              &none         &none         &none         &none         &caps_word      &none    &none  &none  &none  &none  &none  &none  &none
+                                 &none         &none         &none         &none           &none    &none  &none  &none  &none  &none
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
