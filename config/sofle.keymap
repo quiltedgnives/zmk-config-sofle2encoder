@@ -36,6 +36,42 @@
             #binding-cells = <0>;
             continue-list = <POUND MINUS BACKSPACE UNDERSCORE>;
         };
+
+        HRM_L: HRM_L {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HRM_L";
+            bindings = <&kp>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <280>;
+            quick-tap-ms = <175>;
+            hold-trigger-on-release;
+            hold-trigger-key-positions = <52 53 54 42 6 7 8 9 10 11 18 19 20 21 22 23 30 31 32 33 34 35 43 44 45 46 47 48 49 48 55 56 57 58 59>;
+            flavor = "tap-preferred";
+        };
+
+        HMR_R: HMR_R {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HMR_R";
+            bindings = <&kp>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <280>;
+            quick-tap-ms = <175>;
+            hold-trigger-on-release;
+            flavor = "tap-preferred";
+            hold-trigger-key-positions = <42 0 1 5 12 13 14 15 16 17 24 25 26 27 28 29 36 37 38 39 40 41 42 50 51 52 53 54 2 3 4 43 55 56 57>;
+        };
+
+        CAPS_OR_LAYER: CAPS_OR_LAYER {
+            compatible = "zmk,behavior-hold-tap";
+            label = "CAPS_OR_LAYER";
+            bindings = <&mo>, <&caps>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <280>;
+            quick-tap-ms = <175>;
+        };
     };
 
     keymap {
@@ -52,11 +88,11 @@
             //               | GUI | ALT  | CTRL | LOWER|  ENTER |  | SPACE | RAISE| CTRL  | ALT   | GUI  |
 
             bindings = <
-&kp EQUAL       &kp N1              &kp N2          &kp N3          &kp N4            &kp N5                                     &kp N6     &kp N7             &kp N8           &kp N9          &kp N0                  &kp MINUS
-&kp GRAVE       &kp Q               &kp W           &kp E           &kp R             &kp T                                      &kp Y      &kp U              &kp I            &kp O           &kp P                   &kp BACKSLASH
-&lt 2 CAPSLOCK  &mt LEFT_CONTROL A  &mt LEFT_ALT S  &mt LEFT_GUI D  &mt LEFT_SHIFT F  &kp G                                      &kp H      &mt RIGHT_SHIFT J  &mt RIGHT_GUI K  &mt LEFT_ALT L  &mt RIGHT_CONTROL SEMI  &kp SQT
-&mo 1           &kp Z               &kp X           &kp C           &kp V             &kp B      &kp C_MUTE    &kp C_PLAY_PAUSE  &kp N      &kp M              &kp COMMA        &kp DOT         &kp FSLH                &mo 1
-                                    &none           &none           &mo 3             &kp SPACE  &kp TAB       &kp BACKSPACE     &kp ENTER  &kp ESCAPE         &none            &none
+&kp EQUAL           &kp N1                 &kp N2             &kp N3             &kp N4               &kp N5                                     &kp N6     &kp N7                &kp N8              &kp N9             &kp N0                     &kp MINUS
+&kp GRAVE           &kp Q                  &kp W              &kp E              &kp R                &kp T                                      &kp Y      &kp U                 &kp I               &kp O              &kp P                      &kp BACKSLASH
+&CAPS_OR_LAYER 2 0  &HRM_L LEFT_CONTROL A  &HRM_L LEFT_ALT S  &HRM_L LEFT_GUI D  &HRM_L LEFT_SHIFT F  &kp G                                      &kp H      &HMR_R RIGHT_SHIFT J  &HMR_R RIGHT_GUI K  &HMR_R LEFT_ALT L  &HMR_R RIGHT_CONTROL SEMI  &kp SQT
+&mo 1               &kp Z                  &kp X              &kp C              &kp V                &kp B      &kp C_MUTE    &kp C_PLAY_PAUSE  &kp N      &kp M                 &kp COMMA           &kp DOT            &kp FSLH                   &mo 1
+                                           &none              &none              &mo 3                &kp SPACE  &kp TAB       &kp BACKSPACE     &kp ENTER  &kp ESCAPE            &none               &none
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
@@ -74,11 +110,11 @@
             //               |     |      |      |      |        |  |       |      |       |       |      |
 
             bindings = <
-&none  &none             &kp N7                 &kp N8           &kp N9             &kp LEFT_BRACKET                      &kp RIGHT_BRACKET      &kp F10             &kp F11           &kp F12           &none              &none
-&none  &none             &kp N4                 &kp N5           &kp N6             &kp LEFT_BRACE                        &kp RIGHT_BRACE        &kp F7              &kp F8            &kp F9            &none              &none
-&none  &kp LEFT_CONTROL  &mt LEFT_ALT NUMBER_1  &mt LEFT_GUI N2  &mt LEFT_SHIFT N3  &kp LEFT_PARENTHESIS                  &kp RIGHT_PARENTHESIS  &mt RIGHT_SHIFT F4  &mt RIGHT_GUI F5  &mt RIGHT_ALT F6  &kp RIGHT_CONTROL  &none
-&none  &none             &kp COMMA              &kp DOT          &kp N0             &kp LESS_THAN         &none    &none  &kp GREATER_THAN       &kp F1              &kp F2            &kp F3            &none              &none
-                         &none                  &none            &none              &none                 &none    &none  &none                  &none               &none             &none
+&none  &none             &kp N7                    &kp N8              &kp N9                &kp LEFT_BRACKET                      &kp RIGHT_BRACKET      &kp F10                &kp F11              &kp F12              &none              &none
+&none  &none             &kp N4                    &kp N5              &kp N6                &kp LEFT_BRACE                        &kp RIGHT_BRACE        &kp F7                 &kp F8               &kp F9               &none              &none
+&none  &kp LEFT_CONTROL  &HRM_L LEFT_ALT NUMBER_1  &HRM_L LEFT_GUI N2  &HRM_L LEFT_SHIFT N3  &kp LEFT_PARENTHESIS                  &kp RIGHT_PARENTHESIS  &HMR_R RIGHT_SHIFT F4  &HMR_R RIGHT_GUI F5  &HMR_R RIGHT_ALT F6  &kp RIGHT_CONTROL  &none
+&none  &none             &kp COMMA                 &kp DOT             &kp N0                &kp LESS_THAN         &none    &none  &kp GREATER_THAN       &kp F1                 &kp F2               &kp F3               &none              &none
+                         &none                     &none               &none                 &none                 &none    &none  &none                  &none                  &none                &none
             >;
 
             sensor-bindings =
@@ -109,7 +145,7 @@
 
         arrows {
             bindings = <
-&trans          &trans        &trans  &trans  &trans  &tog 4                    &trans    &trans    &trans  &trans     &trans         &trans
+&trans          &trans        &trans  &trans  &trans  &to 4                     &trans    &trans    &trans  &trans     &trans         &trans
 &trans          &trans        &trans  &trans  &trans  &trans                    &trans    &trans    &trans  &trans     &trans         &trans
 &trans          &trans        &trans  &trans  &trans  &trans                    &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT  &trans         &trans
 &kp LEFT_SHIFT  &kp LEFT_ALT  &trans  &trans  &trans  &trans  &trans    &trans  &trans    &trans    &trans  &trans     &kp RIGHT_ALT  &kp RIGHT_SHIFT
@@ -133,11 +169,11 @@
 
             display-name = "System";
             bindings = <
-&bt BT_CLR_ALL     &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4                    &none  &none  &none  &none  &none  &none
+&none              &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4                    &none  &none  &none  &none  &none  &bt BT_CLR_ALL
 &ext_power EP_TOG  &none         &none         &none         &none         &studio_unlock                  &none  &none  &none  &none  &none  &none
 &none              &none         &none         &none         &none         &none                           &none  &none  &none  &none  &none  &none
 &none              &none         &none         &none         &none         &caps_word      &none    &none  &none  &none  &none  &none  &none  &none
-                                 &none         &none         &none         &none           &none    &none  &none  &none  &none  &none
+                                 &none         &none         &none         &none           &none    &none  &none  &to 0  &none  &none
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
