@@ -42,7 +42,7 @@
         compatible = "zmk,keymap";
 
         alpha {
-            display-name = "Base";
+            display-name = "Alpha";
 
             // ------------------------------------------------------------------------------------------------------------
             // |   `   |  1  |  2  |  3   |  4   |  5   |                   |  6   |  7    |  8    |  9   |   0   |       |
@@ -87,7 +87,7 @@
         };
 
         hotkeys {
-            display-name = "Nav";
+            display-name = "Hotkeys";
 
             // ------------------------------------------------------------------------------------------------------------
             // | BTCLR | BT1  | BT2  |  BT3  |  BT4  |  BT5 |                |      |      |       |      |       |       |
@@ -119,6 +119,8 @@
             sensor-bindings =
                 <&inc_dec_kp C_VOL_UP C_VOL_DN>,
                 <&inc_dec_kp PG_UP PAGE_DOWN>;
+
+            label = "Arrows";
         };
 
         system {
